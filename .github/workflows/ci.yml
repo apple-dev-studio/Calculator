@@ -18,8 +18,12 @@ jobs:
         with:
           xcode-version: 'latest-stable'
 
-      - name: Build project
+      - name: Install xcpretty
+        run: gem install xcpretty
+
+      - name: Build project (no code signing, pretty logs)
         run: |
+          set -o pipefail && \
           xcodebuild \
             -project Calculator.xcodeproj \
             -scheme Calculator \
@@ -27,4 +31,4 @@ jobs:
             clean build \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
-            CODE_SIGNING_ALLOWED=NO
+            CODE_SIGNING_ALLOWED=NO | xcpretty
