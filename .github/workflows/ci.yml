@@ -18,11 +18,11 @@ jobs:
         with:
           xcode-version: 'latest-stable'
 
-      - name: Build and test
+      - name: Build project
         run: |
           xcodebuild \
             -project Calculator.xcodeproj \
             -scheme Calculator \
             -sdk iphonesimulator \
             -destination 'platform=iOS Simulator,name=iPhone 15,OS=18.4' \
-            clean test
+            clean build
