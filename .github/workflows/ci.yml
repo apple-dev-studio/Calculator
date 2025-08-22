@@ -1,20 +1,37 @@
-name: macOS Build
+name: iOS CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ main ]
+    branches: [ "main" ]
 
 jobs:
   build:
     runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-    - name: Build for macOS
+    - name: Set up Ruby (for CocoaPods, optional)
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.1' # adjust if needed
+
+    - name: Install CocoaPods dependencies
       run: |
-        xcodebuild -project Calculator.xcodeproj -scheme Calculator -destination 'platform=macOS' clean build
-      env:
-        DEVELOPER_DIR: /Applications/Xcode.app/Contents/Developer
+        gem install cocoapods --no-document
+        pod install --project-directory=YourProjectName
+
+    - name: Select Xcode
+      run: sudo xcode-select -s /Applications/Xcode_15.2.app
+
+    - name: Build and test
+      run: |
+        xcodebuild \
+          -workspace Calculator.xcworkspace \
+          -scheme Calculator \
+          -sdk iphonesimulator \
+          -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.2' \
+          clean test
