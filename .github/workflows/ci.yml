@@ -20,7 +20,7 @@ jobs:
     - name: Build and test
       run: |
         xcodebuild \
-          -project YourProjectName.xcodeproj \
+          -project Calculator.xcodeproj \
           -scheme Calculator \
           -sdk iphonesimulator \
           -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.2' \
