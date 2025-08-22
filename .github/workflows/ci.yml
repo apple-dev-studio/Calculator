@@ -25,6 +25,6 @@ jobs:
 
     - name: Build and test
       run: |
-        xcodebuild -workspace Calculator.xcworkspace -scheme Calculator -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14' clean test | xcpretty
+        xcodebuild -workspace project.xcworkspace -scheme Calculator -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14' clean test | xcpretty
       env:
         DEVELOPER_DIR: /Applications/Xcode.app/Contents/Developer
