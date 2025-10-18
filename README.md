@@ -1,5 +1,5 @@
 # Calculator
-Using Swift UI
+Using Swift/SwiftUI
 
 | iPhone | iPad |
 | ------ | ---- |
